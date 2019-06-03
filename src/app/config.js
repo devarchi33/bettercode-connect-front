@@ -1,3 +1,3 @@
 export default {
-    apiUrl: 'http://localhost:8080/api/v1/excel-processor'
+    apiUrl: 'http://localhost:8080/api/v1'
 }
