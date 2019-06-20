@@ -1,3 +1,4 @@
-import AccountAPI from './AccountAPI';
+import ExcelProcessorAPI from './ExcelProcessorAPI';
+import BankAccountAPI from './BankAccountAPI'
 
-export { AccountAPI };
+export { ExcelProcessorAPI, BankAccountAPI };

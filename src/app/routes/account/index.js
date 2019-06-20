@@ -4,7 +4,7 @@ const { Content } = Layout;
 import './account.css';
 import {connect} from "react-redux";
 import PageHeader from "ant-design-pro/lib/PageHeader";
-import { AccountAPI } from "../../service";
+import {BankAccountAPI, ExcelProcessorAPI} from "../../service";
 import { ColorEntity } from '../../entity';
 
 const DescriptionsItem = Descriptions.Item;
@@ -82,7 +82,7 @@ class Account extends React.Component {
     };
 
     loadAccountData = (id) => {
-        AccountAPI.getAccountData(id)
+        ExcelProcessorAPI.getAccountData(id)
             .then(account =>  this.setState({account: account}));
     };
 
@@ -102,7 +102,7 @@ class Account extends React.Component {
                             </Upload>
                         </Col>
                         <Col span={2}>
-                            <Button type={'primary'} onClick={() => console.log(account)}>Save</Button>
+                            <Button type={'primary'} onClick={() => BankAccountAPI.createBankAccountRecords(account['bettercodeConnectAccountRecords'])}>Save</Button>
                         </Col>
                     </Row>
                     <Row>
