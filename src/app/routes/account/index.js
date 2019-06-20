@@ -86,6 +86,8 @@ class Account extends React.Component {
             .then(account =>  this.setState({account: account}));
     };
 
+    getYearFromAccount = (account) => _.uniq(account['bettercodeConnectAccountRecords'].map(record => record['transactionTime'].split(" ")[0].split(".")[0]))[0];
+
     render() {
         const { account } = this.state;
 
@@ -102,7 +104,14 @@ class Account extends React.Component {
                             </Upload>
                         </Col>
                         <Col span={2}>
-                            <Button type={'primary'} onClick={() => BankAccountAPI.createBankAccountRecords(account['bettercodeConnectAccountRecords'])}>Save</Button>
+                            <Button type={'primary'} onClick={() => BankAccountAPI.createBankAccountRecords(
+                                account['accountNo'],
+                                this.getYearFromAccount(account),
+                                3,
+                                account['bettercodeConnectAccountRecords'])
+                            }>
+                                Save
+                            </Button>
                         </Col>
                     </Row>
                     <Row>
