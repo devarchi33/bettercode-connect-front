@@ -91,17 +91,22 @@ class Account extends React.Component {
 
         return (
             <Content>
-                <PageHeader title={<p><Icon type="code-o"/>Connect Account</p>}/>
+                <PageHeader title={<p><Icon type="code-o"/>분기별 거래이력 입력</p>}/>
                 <Card style={{borderTop: '3px solid ' + ColorEntity.mainColor}}>
                     <Row type="flex" justify="end">
-                        <Upload {...this.uploadProps}>
-                            <Button>
-                                <Icon type="upload" /> Upload
-                            </Button>
-                        </Upload>
+                        <Col span={2}>
+                            <Upload {...this.uploadProps}>
+                                <Button>
+                                    <Icon type="upload" /> Upload
+                                </Button>
+                            </Upload>
+                        </Col>
+                        <Col span={2}>
+                            <Button type={'primary'} onClick={() => console.log(account)}>Save</Button>
+                        </Col>
                     </Row>
                     <Row>
-                        <Descriptions title="Account Info">
+                        <Descriptions title="계좌정보">
                             <DescriptionsItem label={'계좌번호'}>{account['accountNo'] ? account['accountNo'].split(":")[1] : ''}</DescriptionsItem>
                             <DescriptionsItem label={'최초대출일'}>{account['firstLoanDate'] ? account['firstLoanDate'].split(":")[1] : ''}</DescriptionsItem>
                             <DescriptionsItem label={'총잔액'}>{account['totalBalance'] ? account['totalBalance'].split(":")[1] : ''}</DescriptionsItem>
@@ -110,6 +115,8 @@ class Account extends React.Component {
                             <DescriptionsItem label={'대출한도'}>{account['loanLimit'] ? account['loanLimit'].split(":")[1] : ''}</DescriptionsItem>
                             <DescriptionsItem label={'출금가능액'}>{account['allowanceAmount'] ? account['allowanceAmount'].split(":")[1] : ''}</DescriptionsItem>
                             <DescriptionsItem label={'대출이율'}>{account['loanInterestRate'] ? account['loanInterestRate'].split(":")[1] : ''}</DescriptionsItem>
+                        </Descriptions>
+                        <Descriptions title="기간에 따른 변경값">
                             <DescriptionsItem label={'출금합계'}>{account['widthdrawalSum'] ? account['widthdrawalSum'].split(":")[1] : ''}</DescriptionsItem>
                             <DescriptionsItem label={'입금합계'}>{account['depositSum'] ? account['depositSum'].split(":")[1] : ''}</DescriptionsItem>
                             <DescriptionsItem label={'조회기간'}>{account['checkPeriod'] ? account['checkPeriod'].split(":")[1] : ''}</DescriptionsItem>
@@ -118,7 +125,6 @@ class Account extends React.Component {
                     <Row>
                         <Table columns={this.columns}
                                dataSource={account['bettercodeConnectAccountRecords'] ? account['bettercodeConnectAccountRecords'].map((record, index) => {return {...record, key: index}}) : []}
-                               rowKey={record=> record[0]}
                                pagination={false}
                                style={{ "marginTop":"30px" }}
                                bordered/>
