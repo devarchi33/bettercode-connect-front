@@ -1,11 +1,11 @@
 import React from 'react';
 import {Icon, Table, Layout, Row, Card, Descriptions, Upload, Button, Col, message, Select} from 'antd';
 const { Content } = Layout;
-import './account.css';
+import '../account.css';
 import {connect} from "react-redux";
 import PageHeader from "ant-design-pro/lib/PageHeader";
-import {BankAccountAPI, ExcelProcessorAPI} from "../../service";
-import { ColorEntity } from '../../entity';
+import {BankAccountAPI, ExcelProcessorAPI} from "../../../service";
+import { ColorEntity } from '../../../entity';
 
 const DescriptionsItem = Descriptions.Item;
 const Option = Select.Option;

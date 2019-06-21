@@ -3,13 +3,17 @@ import {Route} from 'react-router-dom';
 
 import {Layout, Menu} from 'antd';
 import {BettercodeConnectHeader, BettercodeConnectFooter} from './LayoutItem';
-import Account from 'routes/account'
+import {
+    UploadBankAccountRecord,
+    SearchBankAccountRecord
+} from '../index';
 
 const {Sider, Content} = Layout;
 
 export default class connectLayout extends React.Component {
     constructor(props) {
         super(props);
+        this.state = { current: 'app/account/upload' };
     };
 
     render() {
@@ -21,18 +25,25 @@ export default class connectLayout extends React.Component {
                         <Sider width={200}>
                             <Menu
                                 mode="inline"
-                                defaultOpenKeys={['account']}
-                                defaultSelectedKeys={[window.location.hash.split('#')[1].split('/')[1]]}
                                 style={{ height: '100%' }}
-                                onClick={(item, key, keyPath) => window.location.href = "#/" + item.key}
+                                onClick={(item, key, keyPath) => {
+                                    this.setState(
+                                        {current: item.key},
+                                        () => window.location.href = "#/" + item.key)
+                                }}
+                                selectedKeys={[this.state.current]}
                             >
-                                <Menu.Item key={'app/account'}>
-                                    {'Account'}
+                                <Menu.Item key={'app/account/upload'} >
+                                    {'거래이력 등록'}
+                                </Menu.Item>
+                                <Menu.Item key={'app/account/search'}>
+                                    {'거래이력 조회'}
                                 </Menu.Item>
                             </Menu>
                         </Sider>
                         <Content style={{padding: '0 24px', minHeight: 280}}>
-                            <Route path="/app/account" component={Account}/>
+                            <Route path="/app/account/upload" component={UploadBankAccountRecord}/>
+                            <Route path="/app/account/search" component={SearchBankAccountRecord}/>
                         </Content>
                     </Layout>
                 </Content>

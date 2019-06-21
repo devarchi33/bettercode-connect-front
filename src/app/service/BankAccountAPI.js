@@ -26,4 +26,9 @@ export default class BankAccountAPI {
                 return response.json()
             });
     }
+
+    static searchBankAccountRecords = (accountNo, year, quater) => {
+        return fetch(BankAccountAPI.BASE_URL + `?tenantCode=bettercode&accountNo=${accountNo}&year=${year}&quater=${quater}`)
+            .then(response => response.json());
+    }
 }
