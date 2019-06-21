@@ -1,5 +1,5 @@
 import React from 'react';
-import {Icon, Table, Layout, Row, Card, Descriptions, Upload, Button, Col, message } from 'antd';
+import {Icon, Table, Layout, Row, Card, Descriptions, Upload, Button, Col, message, Select} from 'antd';
 const { Content } = Layout;
 import './account.css';
 import {connect} from "react-redux";
@@ -8,11 +8,12 @@ import {BankAccountAPI, ExcelProcessorAPI} from "../../service";
 import { ColorEntity } from '../../entity';
 
 const DescriptionsItem = Descriptions.Item;
+const Option = Select.Option;
 
 class Account extends React.Component {
     constructor(pros) {
         super(pros);
-        this.state = {account: [], id: 0};
+        this.state = {workBankAccountRecords: [], id: 0, year: 2019, quater: 1};
         this.columns = [
             {
                 title: 'No',
@@ -82,14 +83,14 @@ class Account extends React.Component {
     };
 
     loadAccountData = (id) => {
-        ExcelProcessorAPI.getAccountData(id)
-            .then(account =>  this.setState({account: account}));
+        ExcelProcessorAPI.getWorkBankAccountRecords(id)
+            .then(workBankAccountRecords=>  this.setState({workBankAccountRecords: workBankAccountRecords}));
     };
 
     getYearFromAccount = (account) => _.uniq(account['bettercodeConnectAccountRecords'].map(record => record['transactionTime'].split(" ")[0].split(".")[0]))[0];
 
     render() {
-        const { account } = this.state;
+        const { workBankAccountRecords } = this.state;
 
         return (
             <Content>
@@ -103,37 +104,51 @@ class Account extends React.Component {
                                 </Button>
                             </Upload>
                         </Col>
-                        <Col span={2}>
-                            <Button type={'primary'} onClick={() => BankAccountAPI.createBankAccountRecords(
-                                account['accountNo'],
-                                this.getYearFromAccount(account),
-                                3,
-                                account['bettercodeConnectAccountRecords'])
-                            }>
+                        <Col>
+                            <Select style={{width: 120, marginRight: 10}} onChange={(value) => this.setState({year: value})}>
+                                <Option value={2019}>2019</Option>
+                                <Option value={2018}>2018</Option>
+                                <Option value={2017}>2017</Option>
+                            </Select>
+                            <Select style={{width: 120, marginRight: 10}} onChange={(value) => this.setState({quater: value})}>
+                                <Option value={1}>1Quater</Option>
+                                <Option value={2}>2Quater</Option>
+                                <Option value={3}>3Quater</Option>
+                                <Option value={4}>4Quater</Option>
+                            </Select>
+                            <Button
+                                type={'primary'}
+                                onClick={() => BankAccountAPI.createBankAccountRecords(
+                                    workBankAccountRecords['accountNo'],
+                                    this.state.year,
+                                    this.state.quater,
+                                    workBankAccountRecords['bettercodeConnectAccountRecords'])
+                                }>
                                 Save
                             </Button>
                         </Col>
                     </Row>
                     <Row>
                         <Descriptions title="계좌정보">
-                            <DescriptionsItem label={'계좌번호'}>{account['accountNo'] ? account['accountNo'].split(":")[1] : ''}</DescriptionsItem>
-                            <DescriptionsItem label={'최초대출일'}>{account['firstLoanDate'] ? account['firstLoanDate'].split(":")[1] : ''}</DescriptionsItem>
-                            <DescriptionsItem label={'총잔액'}>{account['totalBalance'] ? account['totalBalance'].split(":")[1] : ''}</DescriptionsItem>
-                            <DescriptionsItem label={'대출만기일'}>{account['loanMaturityDate'] ? account['loanMaturityDate'].split(":")[1] : ''}</DescriptionsItem>
-                            <DescriptionsItem label={'계좌명'}>{account['accountName'] ? account['accountName'].split(":")[1] : ''}</DescriptionsItem>
-                            <DescriptionsItem label={'대출한도'}>{account['loanLimit'] ? account['loanLimit'].split(":")[1] : ''}</DescriptionsItem>
-                            <DescriptionsItem label={'출금가능액'}>{account['allowanceAmount'] ? account['allowanceAmount'].split(":")[1] : ''}</DescriptionsItem>
-                            <DescriptionsItem label={'대출이율'}>{account['loanInterestRate'] ? account['loanInterestRate'].split(":")[1] : ''}</DescriptionsItem>
+                            <DescriptionsItem label={'계좌번호'}>{workBankAccountRecords['accountNo'] ? workBankAccountRecords['accountNo'].split(":")[1] : ''}</DescriptionsItem>
+                            <DescriptionsItem label={'최초대출일'}>{workBankAccountRecords['firstLoanDate'] ? workBankAccountRecords['firstLoanDate'].split(":")[1] : ''}</DescriptionsItem>
+                            <DescriptionsItem label={'총잔액'}>{workBankAccountRecords['totalBalance'] ? workBankAccountRecords['totalBalance'].split(":")[1] : ''}</DescriptionsItem>
+                            <DescriptionsItem label={'대출만기일'}>{workBankAccountRecords['loanMaturityDate'] ? workBankAccountRecords['loanMaturityDate'].split(":")[1] : ''}</DescriptionsItem>
+                            <DescriptionsItem label={'계좌명'}>{workBankAccountRecords['accountName'] ? workBankAccountRecords['accountName'].split(":")[1] : ''}</DescriptionsItem>
+                            <DescriptionsItem label={'대출한도'}>{workBankAccountRecords['loanLimit'] ? workBankAccountRecords['loanLimit'].split(":")[1] : ''}</DescriptionsItem>
+                            <DescriptionsItem label={'출금가능액'}>{workBankAccountRecords['allowanceAmount'] ? workBankAccountRecords['allowanceAmount'].split(":")[1] : ''}</DescriptionsItem>
+                            <DescriptionsItem label={'대출이율'}>{workBankAccountRecords['loanInterestRate'] ? workBankAccountRecords['loanInterestRate'].split(":")[1] : ''}</DescriptionsItem>
                         </Descriptions>
                         <Descriptions title="기간에 따른 변경값">
-                            <DescriptionsItem label={'출금합계'}>{account['widthdrawalSum'] ? account['widthdrawalSum'].split(":")[1] : ''}</DescriptionsItem>
-                            <DescriptionsItem label={'입금합계'}>{account['depositSum'] ? account['depositSum'].split(":")[1] : ''}</DescriptionsItem>
-                            <DescriptionsItem label={'조회기간'}>{account['checkPeriod'] ? account['checkPeriod'].split(":")[1] : ''}</DescriptionsItem>
+                            <DescriptionsItem label={'출금합계'}>{workBankAccountRecords['widthdrawalSum'] ? workBankAccountRecords['widthdrawalSum'].split(":")[1] : ''}</DescriptionsItem>
+                            <DescriptionsItem label={'입금합계'}>{workBankAccountRecords['depositSum'] ? workBankAccountRecords['depositSum'].split(":")[1] : ''}</DescriptionsItem>
+                            <DescriptionsItem label={'조회기간'}>{workBankAccountRecords['checkPeriod'] ? workBankAccountRecords['checkPeriod'].split(":")[1] : ''}</DescriptionsItem>
                         </Descriptions>
                     </Row>
                     <Row>
                         <Table columns={this.columns}
-                               dataSource={account['bettercodeConnectAccountRecords'] ? account['bettercodeConnectAccountRecords'].map((record, index) => {return {...record, key: index}}) : []}
+                               dataSource={workBankAccountRecords['bettercodeConnectAccountRecords']
+                                   ? workBankAccountRecords['bettercodeConnectAccountRecords'].map((record, index) => {return {...record, key: index}}) : []}
                                pagination={false}
                                style={{ "marginTop":"30px" }}
                                bordered/>

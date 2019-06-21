@@ -20,6 +20,8 @@ export default class BankAccountAPI {
                 console.log("RESPONSE: ", response);
                 if(response['status'] === 201) {
                     message.success(`save successfully`);
+                } else {
+                    message.error(`save failed`);
                 }
                 return response.json()
             });
