@@ -71,7 +71,7 @@ export default class App extends React.Component {
 
         return (
             <Content>
-                <PageHeader title={<p><Icon type="search"/>분기별 거래이력 조회</p>}/>
+                <PageHeader title={<p><Icon type="search"/> 분기별 거래이력 조회</p>}/>
                 <Card style={{borderTop: '3px solid ' + ColorEntity.mainColor}}>
                     <Row type="flex" justify="end">
                         <Input style={{width: 180, marginRight: 10}} placeholder={'accountNo'} type={'text'} onChange={(e) => this.setState({accountNo: e['target']['value']})}/>

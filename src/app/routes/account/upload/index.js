@@ -94,7 +94,7 @@ class Account extends React.Component {
 
         return (
             <Content>
-                <PageHeader title={<p><Icon type="code-o"/>분기별 거래이력 입력</p>}/>
+                <PageHeader title={<p><Icon type="file-add"/> 분기별 거래이력 등록</p>}/>
                 <Card style={{borderTop: '3px solid ' + ColorEntity.mainColor}}>
                     <Row type="flex" justify="end">
                         <Col span={2}>

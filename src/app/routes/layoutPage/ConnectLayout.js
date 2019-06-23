@@ -38,10 +38,10 @@ export default class connectLayout extends React.Component {
                             >
                                 <Menu.ItemGroup key="g1" title="은행 거래이력">
                                     <Menu.Item key={'app/account/upload'} >
-                                        {'거래이력 등록'}
+                                        {'분기별 거래이력 등록'}
                                     </Menu.Item>
                                     <Menu.Item key={'app/account/search'}>
-                                        {'거래이력 조회'}
+                                        {'분기별 거래이력 조회'}
                                     </Menu.Item>
                                 </Menu.ItemGroup>
                                 <Menu.ItemGroup key="g2" title="휴가결제">
