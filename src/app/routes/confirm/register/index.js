@@ -1,11 +1,11 @@
 import React from 'react';
-import {Card, Icon, Layout} from 'antd';
-import PageHeader from "ant-design-pro/lib/PageHeader";
-import {ColorEntity} from "../../entity";
+import {Card, Icon, Layout} from 'antd/lib/index';
+import PageHeader from "ant-design-pro/lib/PageHeader/index";
+import {ColorEntity} from "../../../entity";
 
 const { Content } = Layout;
 
-export default class Approval extends React.Component {
+export default class Register extends React.Component {
     render() {
         return (
             <Content>

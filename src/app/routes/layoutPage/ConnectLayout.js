@@ -6,10 +6,12 @@ import {BettercodeConnectHeader, BettercodeConnectFooter} from './LayoutItem';
 import {
     UploadBankAccountRecord,
     SearchBankAccountRecord,
-    Approval
+    HolidayRegister,
+    HolidayApproval
 } from '../index';
 
 const {Sider, Content} = Layout;
+const {ItemGroup} = Menu;
 
 export default class connectLayout extends React.Component {
     constructor(props) {
@@ -34,21 +36,29 @@ export default class connectLayout extends React.Component {
                                 }}
                                 selectedKeys={[this.state.current]}
                             >
-                                <Menu.Item key={'app/account/upload'} >
-                                    {'거래이력 등록'}
-                                </Menu.Item>
-                                <Menu.Item key={'app/account/search'}>
-                                    {'거래이력 조회'}
-                                </Menu.Item>
-                                <Menu.Item key={'app/approval'}>
-                                    {'휴가결제 신청'}
-                                </Menu.Item>
+                                <Menu.ItemGroup key="g1" title="은행 거래이력">
+                                    <Menu.Item key={'app/account/upload'} >
+                                        {'거래이력 등록'}
+                                    </Menu.Item>
+                                    <Menu.Item key={'app/account/search'}>
+                                        {'거래이력 조회'}
+                                    </Menu.Item>
+                                </Menu.ItemGroup>
+                                <Menu.ItemGroup key="g2" title="휴가결제">
+                                    <Menu.Item key={'app/confirm/register'}>
+                                        {'휴가결제 신청'}
+                                    </Menu.Item>
+                                    <Menu.Item key={'app/confirm/approval'}>
+                                        {'휴가결제 승인'}
+                                    </Menu.Item>
+                                </Menu.ItemGroup>
                             </Menu>
                         </Sider>
                         <Content style={{padding: '0 24px', minHeight: 280}}>
                             <Route path="/app/account/upload" component={UploadBankAccountRecord}/>
                             <Route path="/app/account/search" component={SearchBankAccountRecord}/>
-                            <Route path="/app/approval" component={Approval}/>
+                            <Route path="/app/confirm/register" component={HolidayRegister}/>
+                            <Route path="/app/confirm/approval" component={HolidayApproval}/>
                         </Content>
                     </Layout>
                 </Content>
