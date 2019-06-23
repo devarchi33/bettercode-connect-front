@@ -5,7 +5,8 @@ import {Layout, Menu} from 'antd';
 import {BettercodeConnectHeader, BettercodeConnectFooter} from './LayoutItem';
 import {
     UploadBankAccountRecord,
-    SearchBankAccountRecord
+    SearchBankAccountRecord,
+    Approval
 } from '../index';
 
 const {Sider, Content} = Layout;
@@ -39,11 +40,15 @@ export default class connectLayout extends React.Component {
                                 <Menu.Item key={'app/account/search'}>
                                     {'거래이력 조회'}
                                 </Menu.Item>
+                                <Menu.Item key={'app/approval'}>
+                                    {'휴가결제 신청'}
+                                </Menu.Item>
                             </Menu>
                         </Sider>
                         <Content style={{padding: '0 24px', minHeight: 280}}>
                             <Route path="/app/account/upload" component={UploadBankAccountRecord}/>
                             <Route path="/app/account/search" component={SearchBankAccountRecord}/>
+                            <Route path="/app/approval" component={Approval}/>
                         </Content>
                     </Layout>
                 </Content>
