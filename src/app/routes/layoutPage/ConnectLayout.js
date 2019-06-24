@@ -6,8 +6,8 @@ import {BettercodeConnectHeader, BettercodeConnectFooter} from './LayoutItem';
 import {
     UploadBankAccountRecord,
     SearchBankAccountRecord,
-    HolidayRegister,
-    HolidayApproval
+    ApplicantTabs,
+    ApproverTabs
 } from '../index';
 
 const {Sider, Content} = Layout;
@@ -45,11 +45,11 @@ export default class connectLayout extends React.Component {
                                     </Menu.Item>
                                 </Menu.ItemGroup>
                                 <Menu.ItemGroup key="g2" title="휴가결제">
-                                    <Menu.Item key={'app/confirm/register'}>
-                                        {'휴가결제 신청'}
+                                    <Menu.Item key={'app/holiday/applicant'}>
+                                        {'상신자'}
                                     </Menu.Item>
-                                    <Menu.Item key={'app/confirm/approval'}>
-                                        {'휴가결제 승인'}
+                                    <Menu.Item key={'app/holiday/approver'}>
+                                        {'결제자'}
                                     </Menu.Item>
                                 </Menu.ItemGroup>
                             </Menu>
@@ -57,8 +57,8 @@ export default class connectLayout extends React.Component {
                         <Content style={{padding: '0 24px', minHeight: 280}}>
                             <Route path="/app/account/upload" component={UploadBankAccountRecord}/>
                             <Route path="/app/account/search" component={SearchBankAccountRecord}/>
-                            <Route path="/app/confirm/register" component={HolidayRegister}/>
-                            <Route path="/app/confirm/approval" component={HolidayApproval}/>
+                            <Route path="/app/holiday/applicant" component={ApplicantTabs}/>
+                            <Route path="/app/holiday/approver" component={ApproverTabs}/>
                         </Content>
                     </Layout>
                 </Content>

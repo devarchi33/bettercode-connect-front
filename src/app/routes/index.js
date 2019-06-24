@@ -1,6 +1,6 @@
 import UploadBankAccountRecord from './account/upload';
 import SearchBankAccountRecord from './account/search';
-import HolidayRegister from './confirm/register'
-import HolidayApproval from './confirm/approval';
+import ApplicantTabs from './holiday/applicant'
+import ApproverTabs from './holiday/approver';
 
-export { UploadBankAccountRecord, SearchBankAccountRecord, HolidayRegister, HolidayApproval };
+export { UploadBankAccountRecord, SearchBankAccountRecord, ApplicantTabs, ApproverTabs };
