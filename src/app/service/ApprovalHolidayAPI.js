@@ -18,4 +18,14 @@ export default class ApprovalHolidayAPI {
         return fetch(ApprovalHolidayAPI.BASE_URL + `?id=${id}`)
             .then(response => response.json());
     }
+
+    static approveHoliday = (id, isApprove, modifyBy) => {
+        return fetch(ApprovalHolidayAPI.BASE_URL + `?id=${id}&isApprove=true&modifyBy=${modifyBy}`, {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-type": "application/json"
+            }})
+            .then(response => response.json());
+    }
 }

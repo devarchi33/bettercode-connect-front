@@ -30,8 +30,7 @@ class HolidayRegisterForm extends React.Component {
             })
             .then(result => {
                 if(result['status'] >= 400) {
-                    message.error(`휴가 신청 실패: ${JSON.stringify(result['errors'])}`, );
-                    return;
+                    message.error(`휴가 신청 실패: ${JSON.stringify(result['errors'])}`);
                 } else {
                     message.success(`휴가신청 번호: ${result} 승인대기중.`)
                 }

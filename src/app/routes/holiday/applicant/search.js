@@ -35,7 +35,6 @@ export default class ApplicantSearch extends React.Component {
         ApprovalHolidayAPI
             .findApprovalHoliday(id)
             .then(response => {
-                console.log("RESPONSE: ", response);
                 this.setState({dataSource: [response].map((data,index) => {
                         return {...data, key: index};
                     })});
