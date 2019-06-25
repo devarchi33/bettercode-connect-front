@@ -13,4 +13,9 @@ export default class ApprovalHolidayAPI {
             body: JSON.stringify(creatingApprovalHoliday)})
             .then(response => response.json());
     };
+
+    static findApprovalHoliday = (id) => {
+        return fetch(ApprovalHolidayAPI.BASE_URL + `?id=${id}`)
+            .then(response => response.json());
+    }
 }
